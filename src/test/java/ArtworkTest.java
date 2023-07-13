@@ -11,7 +11,6 @@ public class ArtworkTest {
     @BeforeEach
     public void setUp() {
         artist = new Artist("Van Gogh");
-//        TODO Ask about the artist class
         artwork = new Artwork("Sunflower", artist, 100);
     }
 

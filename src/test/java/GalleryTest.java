@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class GalleryTest {
@@ -7,18 +8,18 @@ public class GalleryTest {
     Gallery gallery;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         gallery = new Gallery("The Louvre", 5000);
-        Artwork galenas = new Artwork ("Galenas", new Artist("Picasso"), 500);
-        Artwork candidas = new Artwork ("Candidas", new Artist ("Monet"), 300);
-        Artwork perk = new Artwork ("Perk", new Artist("Vladimir"), 100);
+        Artwork galenas = new Artwork("Galenas", new Artist("Picasso"), 500);
+        Artwork candidas = new Artwork("Candidas", new Artist("Monet"), 300);
+        Artwork perk = new Artwork("Perk", new Artist("Vladimir"), 100);
         gallery.addArtwork(galenas);
         gallery.addArtwork(candidas);
         gallery.addArtwork(perk);
     }
 
     @Test
-    public void canGetName(){
+    public void canGetName() {
         assertThat(gallery.getName()).isEqualTo("The Louvre");
     }
 
@@ -49,14 +50,16 @@ public class GalleryTest {
     @Test
 
     public void canBuyArtwork() {
+        Customer customer = new Customer("Boris", 2000);
         // TODO Final bit of MVP
         //Get price of artwork from arraylist
-        //Substract price from customers wallet
-        //Add price to the galleries till
-        Customer customer = new Customer("Bob", 2000);
-        Artwork artwork = gallery.getArtwork("galenas");
+        Artwork artwork = gallery.getArtwork("Galenas");
         int priceOfArtwork = artwork.getPrice();
+
         gallery.addToTill(priceOfArtwork);
         customer.subtractWallet(priceOfArtwork);
+
+//        assertThat(gallery.getTill()).isEqualTo(5000 + priceOfArtwork);
+//        assertThat(customer.getWallet()).isEqualTo(2000 - priceOfArtwork);
     }
 }
