@@ -11,6 +11,7 @@ public class ArtworkTest {
     @BeforeEach
     public void setUp() {
         artist = new Artist("Van Gogh");
+//        imagine variables as buckets. wherever you use the bucket the data follows as it is inside the bucket
         artwork = new Artwork("Sunflower", artist, 100);
     }
 

@@ -48,18 +48,15 @@ public class GalleryTest {
     }
 
     @Test
-
     public void canBuyArtwork() {
         Customer customer = new Customer("Boris", 2000);
         // TODO Final bit of MVP
         //Get price of artwork from arraylist
         Artwork artwork = gallery.getArtwork("Galenas");
         int priceOfArtwork = artwork.getPrice();
-
         gallery.addToTill(priceOfArtwork);
         customer.subtractWallet(priceOfArtwork);
-
-//        assertThat(gallery.getTill()).isEqualTo(5000 + priceOfArtwork);
-//        assertThat(customer.getWallet()).isEqualTo(2000 - priceOfArtwork);
+        assertThat(gallery.getTill()).isEqualTo(5000 + priceOfArtwork);
+        assertThat(customer.getWallet()).isEqualTo(2000 - priceOfArtwork);
     }
 }

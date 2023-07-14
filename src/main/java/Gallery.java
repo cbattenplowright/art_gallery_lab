@@ -38,10 +38,6 @@ public class Gallery {
         this.till += amount;
     }
 
-    public void getArtworkIndex() {
-
-    }
-
     public Artwork getArtwork(String artworkTitle) {
 //        gets artwork from array by searching for artwork given its title
         for (Artwork artwork : artworks) {
