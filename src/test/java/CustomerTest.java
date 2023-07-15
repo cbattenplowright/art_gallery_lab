@@ -27,9 +27,4 @@ public class CustomerTest {
         assertThat(customer.getWallet()).isEqualTo(4000);
     }
 
-    @Test
-    public void canSubtractWallet() {
-        customer.subtractWallet(200);
-        assertThat(customer.getWallet()).isEqualTo(4800);
-    }
 }

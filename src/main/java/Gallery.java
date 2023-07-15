@@ -5,15 +5,40 @@ public class Gallery {
 
     private String name;
     private int till;
-    private ArrayList<Artwork> artworks;
+    private ArrayList<Artwork> stock;
 
 
-    public Gallery(String name, int till){
+    public Gallery(String name) {
         this.name = name;
-        this.till = till;
-        this.artworks = new ArrayList<>();
+        this.till = 0;
+        this.stock = new ArrayList<>();
     }
 
+    public void addArtwork(Artwork artwork) {
+        this.stock.add(artwork);
+    }
+
+    public void addToTill(int amount) {
+        this.till += amount;
+    }
+
+    public void removeFromGallery(Artwork artwork) {
+        stock.remove(artwork);
+    }
+
+    public void sellArtwork(Customer customer, Artwork artwork) {
+        if (customer.canBuy(artwork)) {
+            customer.buyArtwork(artwork);
+            removeFromGallery(artwork);
+            setTill(this.till + artwork.getPrice());
+        }
+    }
+
+    public boolean ArtworkInCollection(Artwork artwork) {
+        return stock.contains(artwork);
+    }
+
+    //    GETTERS and SETTERS
     public String getName() {
         return this.name;
     }
@@ -22,29 +47,19 @@ public class Gallery {
         return this.till;
     }
 
-    public int getArtworkCount() {
-        return this.artworks.size();
-    }
-
-    public void addArtwork(Artwork artwork) {
-        this.artworks.add(artwork);
-    }
-
     public void setTill(int amount) {
         this.till = amount;
     }
 
-    public void addToTill(int amount) {
-        this.till += amount;
+    public int getArtworkCount() {
+        return this.stock.size();
     }
 
-    public Artwork getArtwork(String artworkTitle) {
-//        gets artwork from array by searching for artwork given its title
-        for (Artwork artwork : artworks) {
-            if (Objects.equals(artwork.getTitle(), artworkTitle)) {
-                return artwork;
-            }
+    public int getCollectionValue() {
+        int total = 0;
+        for (Artwork artwork : stock) {
+            total += artwork.getPrice();
         }
-        return null;
+        return total;
     }
 }

@@ -6,13 +6,22 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class GalleryTest {
 
     Gallery gallery;
+    Artist picasso;
+    Artist monet;
+    Artist vanGogh;
+    Artwork galenas;
+    Artwork candidas;
+    Artwork perk;
 
     @BeforeEach
     public void setUp() {
-        gallery = new Gallery("The Louvre", 5000);
-        Artwork galenas = new Artwork("Galenas", new Artist("Picasso"), 500);
-        Artwork candidas = new Artwork("Candidas", new Artist("Monet"), 300);
-        Artwork perk = new Artwork("Perk", new Artist("Vladimir"), 100);
+        gallery = new Gallery("The Louvre");
+        picasso = new Artist("Picasso");
+        monet = new Artist("Monet");
+        vanGogh = new Artist("Van Gogh");
+        galenas = new Artwork("Galenas", picasso, 500);
+        candidas = new Artwork("Candidas", monet, 300);
+        perk = new Artwork("Perk", vanGogh, 100);
         gallery.addArtwork(galenas);
         gallery.addArtwork(candidas);
         gallery.addArtwork(perk);
@@ -48,15 +57,24 @@ public class GalleryTest {
     }
 
     @Test
-    public void canBuyArtwork() {
-        Customer customer = new Customer("Boris", 2000);
-        // TODO Final bit of MVP
-        //Get price of artwork from arraylist
-        Artwork artwork = gallery.getArtwork("Galenas");
-        int priceOfArtwork = artwork.getPrice();
-        gallery.addToTill(priceOfArtwork);
-        customer.subtractWallet(priceOfArtwork);
-        assertThat(gallery.getTill()).isEqualTo(5000 + priceOfArtwork);
-        assertThat(customer.getWallet()).isEqualTo(2000 - priceOfArtwork);
+    public void isArtworkInCollection(){
+        assertThat(gallery.ArtworkInCollection(galenas)).isEqualTo(true);
     }
+
+    @Test
+    public void canSellArtwork() {
+        Customer customer = new Customer("Bob Geldof", 20000);
+        gallery.sellArtwork(customer, galenas);
+//        You can write multiple asserts to test if a complex method has succeeded
+        assertThat(gallery.ArtworkInCollection(galenas)).isEqualTo(false);
+        assertThat(gallery.getTill()).isEqualTo(500);
+        assertThat(customer.getWallet()).isEqualTo(19500);
+        assertThat(customer.isArtworkInCollection(galenas)).isEqualTo(true);
+    }
+
+    @Test
+    public void canCalculateCollectionValue() {
+        assertThat(gallery.getCollectionValue()).isEqualTo(900);
+    }
+
 }
